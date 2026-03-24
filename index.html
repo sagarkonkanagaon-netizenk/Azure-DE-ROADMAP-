@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Azure Data Engineer — 12-Week Interview Roadmap</title>
+<style>
+:root{
+  --navy:#0f2744;--blue:#1565c0;--sky:#1e88e5;--cyan:#00acc1;
+  --green:#2e7d32;--orange:#e65100;--purple:#6a1b9a;--red:#c62828;
+  --gold:#f57f17;--teal:#00695c;
+  --bg:#f0f4f8;--card:#ffffff;--border:#dde3ea;
+  --text:#1a2332;--muted:#5a6a7e;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
+
+/* ── NAV ── */
+nav{background:var(–navy);padding:0;position:sticky;top:0;z-index:999;box-shadow:0 2px 12px rgba(0,0,0,.4);}
+.nav-inner{display:flex;align-items:center;gap:0;overflow-x:auto;padding:0 12px;}
+.nav-inner a{color:#cfd8dc;text-decoration:none;padding:14px 14px;font-size:12.5px;font-weight:600;white-space:nowrap;border-bottom:3px solid transparent;transition:.2s;}
+.nav-inner a:hover,.nav-inner a.active{color:#fff;border-bottom-color:#42a5f5;}
+.nav-logo{color:#fff;font-size:15px;font-weight:700;padding:14px 20px 14px 0;border-right:1px solid #334;margin-right:8px;white-space:nowrap;}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg,#0f2744 0%,#1565c0 60%,#00acc1 100%);color:#fff;padding:60px 40px 50px;text-align:center;}
+.hero h1{font-size:2.4rem;font-weight:800;margin-bottom:10px;letter-spacing:-0.5px;}
+.hero p{font-size:1.1rem;opacity:.88;max-width:700px;margin:0 auto 24px;}
+.hero-badges{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;}
+
+/* ── SECTIONS ── */
+.section{padding:40px 40px;max-width:1200px;margin:0 auto;}
+.section-title{font-size:1.6rem;font-weight:800;color:var(–navy);margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+.section-sub{color:var(–muted);margin-bottom:28px;font-size:.95rem;}
+hr.divider{border:none;border-top:2px solid var(–border);margin:50px 0;}
+
+/* ── ROADMAP DIAGRAM ── */
+#roadmap-section{background:#fff;padding:50px 40px;}
+.roadmap-wrap{max-width:1100px;margin:0 auto;}
+.roadmap-title{text-align:center;font-size:1.8rem;font-weight:800;color:var(–navy);margin-bottom:6px;}
+.roadmap-sub{text-align:center;color:var(–muted);margin-bottom:40px;}
+
+/* Timeline spine */
+.timeline{position:relative;padding-left:0;}
+.timeline::before{content:’’;position:absolute;left:50%;transform:translateX(-50%);top:0;bottom:0;width:4px;background:linear-gradient(180deg,#1565c0,#00acc1,#2e7d32,#e65100,#6a1b9a,#c62828);border-radius:4px;}
+
+.tl-row{display:flex;align-items:flex-start;gap:0;margin-bottom:32px;position:relative;}
+.tl-row.right{flex-direction:row-reverse;}
+.tl-side{width:calc(50% - 40px);padding:0 20px;}
+.tl-row.right .tl-side{text-align:right;}
+.tl-center{width:80px;display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:8px;position:relative;z-index:2;}
+.tl-week-badge{background:var(–navy);color:#fff;border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;text-align:center;line-height:1.2;border:3px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,.25);}
+.tl-connector{height:2px;width:36px;background:#ccc;position:absolute;top:35px;}
+.tl-row:not(.right) .tl-connector{right:-38px;}
+.tl-row.right .tl-connector{left:-38px;}
+
+/* Phase cards (clickable) */
+.phase-card{background:#fff;border-radius:12px;padding:18px 20px;border-left:5px solid #ccc;box-shadow:0 2px 12px rgba(0,0,0,.08);cursor:pointer;transition:.2s;text-decoration:none;display:block;}
+.phase-card:hover{transform:translateY(-3px);box-shadow:0 6px 24px rgba(0,0,0,.14);}
+.tl-row.right .phase-card{border-left:none;border-right:5px solid #ccc;}
+.phase-card .ph-label{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-bottom:4px;}
+.phase-card .ph-title{font-size:1rem;font-weight:800;margin-bottom:6px;}
+.phase-card .ph-topics{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
+.phase-card .ph-topics span{font-size:10.5px;padding:2px 9px;border-radius:12px;font-weight:600;}
+.phase-card .ph-parallel{font-size:11px;color:#666;margin-top:6px;font-style:italic;}
+.phase-card .ph-click{font-size:11px;font-weight:700;margin-top:10px;display:flex;align-items:center;gap:4px;}
+
+/* colour schemes per phase */
+.p1{border-color:#1565c0!important;} .p1 .ph-label{color:#1565c0;} .p1 .ph-topics span{background:#e3f2fd;color:#0d47a1;}
+.p2{border-color:#00897b!important;} .p2 .ph-label{color:#00897b;} .p2 .ph-topics span{background:#e0f2f1;color:#004d40;}
+.p3{border-color:#e65100!important;} .p3 .ph-label{color:#e65100;} .p3 .ph-topics span{background:#fff3e0;color:#bf360c;}
+.p4{border-color:#6a1b9a!important;} .p4 .ph-label{color:#6a1b9a;} .p4 .ph-topics span{background:#f3e5f5;color:#4a148c;}
+.p5{border-color:#2e7d32!important;} .p5 .ph-label{color:#2e7d32;} .p5 .ph-topics span{background:#e8f5e9;color:#1b5e20;}
+.p6{border-color:#c62828!important;} .p6 .ph-label{color:#c62828;} .p6 .ph-topics span{background:#ffebee;color:#b71c1c;}
+.p7{border-color:#f57f17!important;} .p7 .ph-label{color:#f57f17;} .p7 .ph-topics span{background:#fff8e1;color:#e65100;}
+
+/* Parallel study strip */
+.parallel-strip{background:linear-gradient(90deg,#e8f5e9,#e3f2fd);border-radius:10px;padding:14px 20px;margin:8px 0 24px;display:flex;align-items:center;gap:12px;font-size:13px;}
+.parallel-strip strong{color:var(–green);}
+
+/* ── DETAIL PANELS ── */
+.detail-panel{display:none;background:#fff;border-radius:16px;padding:32px;margin:24px 0;box-shadow:0 4px 24px rgba(0,0,0,.1);border-top:6px solid #ccc;animation:slideDown .3s ease;}
+.detail-panel.open{display:block;}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);}}
+.panel-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;}
+.panel-header h2{font-size:1.5rem;font-weight:800;color:var(–navy);}
+.close-btn{background:#f0f0f0;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;}
+.close-btn:hover{background:#ddd;}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px;}
+@media(max-width:800px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+.info-box{background:#f8fafc;border-radius:10px;padding:18px;border-left:4px solid var(–blue);}
+.info-box h4{font-size:.9rem;font-weight:700;color:var(–navy);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;}
+.info-box ul{list-style:none;padding:0;}
+.info-box ul li{padding:4px 0;font-size:.9rem;padding-left:18px;position:relative;}
+.info-box ul li::before{content:”›”;position:absolute;left:0;color:var(–blue);font-weight:700;}
+
+.code-box{background:#1e2a3a;color:#e2e8f0;border-radius:10px;padding:18px;font-family:‘Courier New’,monospace;font-size:.82rem;line-height:1.7;overflow-x:auto;margin:12px 0;}
+.code-box .cmt{color:#64748b;}
+.code-box .kw{color:#93c5fd;}
+.code-box .fn{color:#6ee7b7;}
+.code-box .str{color:#fde68a;}
+
+.interview-q{background:#fffbf0;border-radius:10px;padding:18px;border:1px solid #fde68a;}
+.interview-q h4{color:#92400e;font-size:.9rem;font-weight:700;margin-bottom:10px;text-transform:uppercase;}
+.interview-q .q-item{padding:7px 0;border-bottom:1px solid #fef3c7;font-size:.88rem;}
+.interview-q .q-item:last-child{border:none;}
+.interview-q .q-item strong{color:#78350f;}
+
+.say-box{background:#f0fdf4;border-radius:10px;padding:18px;border:1px solid #86efac;}
+.say-box h4{color:#166534;font-size:.9rem;font-weight:700;margin-bottom:10px;text-transform:uppercase;}
+.say-box p{font-size:.88rem;color:#14532d;font-style:italic;line-height:1.7;}
+
+.week-box{background:#f0f4ff;border-radius:10px;padding:16px;}
+.week-box h4{color:#1e3a8a;font-size:.88rem;font-weight:700;margin-bottom:10px;text-transform:uppercase;}
+.week-tbl{width:100%;border-collapse:collapse;font-size:.84rem;}
+.week-tbl th{background:#1e3a8a;color:#fff;padding:7px 10px;text-align:left;}
+.week-tbl td{padding:6px 10px;border-bottom:1px solid #dbeafe;}
+.week-tbl tr:nth-child(even) td{background:#eff6ff;}
+
+/* ── TIMETABLE SECTION ── */
+.timetable-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+@media(max-width:800px){.timetable-grid{grid-template-columns:1fr;}}
+.tt-card{background:#fff;border-radius:12px;padding:22px;box-shadow:0 2px 12px rgba(0,0,0,.08);}
+.tt-card h3{font-size:1rem;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.tt-slot{display:flex;gap:12px;padding:8px 0;border-bottom:1px solid #f0f0f0;align-items:flex-start;}
+.tt-slot:last-child{border:none;}
+.tt-time{font-size:11px;font-weight:700;color:var(–muted);min-width:80px;padding-top:2px;}
+.tt-act{font-size:.88rem;}
+.tt-act strong{display:block;color:var(–navy);}
+.tt-act span{color:var(–muted);font-size:.82rem;}
+
+/* ── PROJECT SECTION ── */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;}
+.proj-card{background:#fff;border-radius:12px;padding:22px;box-shadow:0 2px 12px rgba(0,0,0,.08);border-top:4px solid var(–blue);}
+.proj-card h3{font-size:1rem;font-weight:800;color:var(–navy);margin-bottom:8px;}
+.proj-card .proj-meta{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+.proj-card .proj-meta span{font-size:10.5px;padding:2px 10px;border-radius:10px;font-weight:700;background:#e3f2fd;color:#0d47a1;}
+.proj-card p{font-size:.87rem;color:var(–muted);margin-bottom:10px;}
+.proj-steps{list-style:none;padding:0;}
+.proj-steps li{font-size:.85rem;padding:4px 0;padding-left:20px;position:relative;}
+.proj-steps li::before{content:counter(step);counter-increment:step;position:absolute;left:0;background:var(–blue);color:#fff;width:15px;height:15px;border-radius:50%;font-size:9px;display:flex;align-items:center;justify-content:center;top:5px;}
+.proj-steps{counter-reset:step;}
+
+/* ── POSITIONING SECTION ── */
+.pos-card{background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.08);margin-bottom:16px;border-left:5px solid var(–orange);}
+.pos-card h3{font-size:1rem;font-weight:800;color:var(–navy);margin-bottom:10px;}
+.narrative-box{background:#fffbf0;border-radius:10px;padding:18px;margin-top:12px;border:1px dashed #fbbf24;}
+.narrative-box p{font-size:.88rem;line-height:1.8;color:#44403c;}
+.narrative-box strong{color:#92400e;}
+
+/* ── MASTER Q&A ── */
+.qa-accordion{margin-bottom:8px;}
+.qa-accordion summary{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 16px;cursor:pointer;font-weight:700;font-size:.9rem;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+.qa-accordion summary::-webkit-details-marker{display:none;}
+.qa-accordion summary::after{content:“▼”;font-size:10px;color:var(–muted);}
+.qa-accordion[open] summary::after{content:“▲”;}
+.qa-accordion[open] summary{background:#e3f2fd;border-color:#90caf9;}
+.qa-content{padding:14px 16px;font-size:.87rem;line-height:1.7;border:1px solid #e2e8f0;border-top:none;border-radius:0 0 8px 8px;}
+.qa-content ul{list-style:none;padding:0;}
+.qa-content ul li{padding:3px 0;padding-left:14px;position:relative;}
+.qa-content ul li::before{content:”•”;position:absolute;left:0;color:var(–blue);}
+
+/* ── CERT SECTION ── */
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.cert-card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.08);text-align:center;}
+.cert-icon{font-size:2.5rem;margin-bottom:10px;}
+.cert-card h4{font-size:.95rem;font-weight:800;color:var(–navy);margin-bottom:6px;}
+.cert-card p{font-size:.82rem;color:var(–muted);margin-bottom:10px;}
+.cert-timing{font-size:.8rem;font-weight:700;padding:4px 12px;border-radius:12px;display:inline-block;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+.hero h1{font-size:1.6rem;}
+.section{padding:24px 16px;}
+#roadmap-section{padding:30px 16px;}
+.timeline::before{left:24px;}
+.tl-row,.tl-row.right{flex-direction:column;padding-left:60px;}
+.tl-center{position:absolute;left:0;top:0;flex-direction:row;width:auto;}
+.tl-side{width:100%;padding:0;}
+.tl-row.right .phase-card{border-right:none;border-left:5px solid #ccc;text-align:left;}
+}
+
+.tag-green{background:#e8f5e9;color:#1b5e20;}
+.tag-blue{background:#e3f2fd;color:#0d47a1;}
+.tag-orange{background:#fff3e0;color:#bf360c;}
+.tag-purple{background:#f3e5f5;color:#4a148c;}
+.tag-red{background:#ffebee;color:#b71c1c;}
+.tag-teal{background:#e0f2f1;color:#004d40;}
+</style>
+
+</head>
+<body>
+
+<!-- NAV -->
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">🚀 DE Roadmap</span>
+    <a href="#roadmap-section">Visual Roadmap</a>
+    <a href="#timetable">Daily Schedule</a>
+    <a href="#projects">Projects</a>
+    <a href="#interview-master">Interview Q&A</a>
+    <a href="#positioning">Positioning Tips</a>
+    <a href="#certs">Certifications</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+
+<div class="hero">
+  <h1>Azure Data Engineer — 12-Week Interview Roadmap</h1>
+  <p>A complete, phase-wise, clickable roadmap built for a working professional transitioning from Associate Analyst to Azure Data Engineer. Every box is interactive — click to reveal what to study, how to code it, and exactly what to say in interviews.</p>
+  <div class="hero-badges">
+    <span class="badge">⏱ 12 Weeks</span>
+    <span class="badge">📋 7 Phases</span>
+    <span class="badge">💼 14 Real Projects</span>
+    <span class="badge">🎯 Tier-2 Interview Ready</span>
+    <span class="badge">🔗 Clickable Roadmap</span>
+  </div>
+</div>
+
+<!-- ═══════════════════ VISUAL ROADMAP ═══════════════════ -->
+
+<div id="roadmap-section">
+<div class="roadmap-wrap">
+  <div class="roadmap-title">📊 Interactive Learning Roadmap</div>
+  <div class="roadmap-sub">Click any phase card to expand full study guide, code samples, and interview Q&A for that topic</div>
+
+  <div class="parallel-strip">
+    <span style="font-size:1.4rem;">⚡</span>
+    <div><strong>Parallel Study Rule:</strong> Weeks 1–2 → SQL + Python together &nbsp;|&nbsp; Weeks 3–4 → Spark theory + Databricks setup &nbsp;|&nbsp; Weeks 5–8 → ADF + ADLS + PySpark simultaneously &nbsp;|&nbsp; Weeks 9–10 → Delta Lake + CI/CD &nbsp;|&nbsp; Weeks 11–12 → Projects + Interview Drills</div>
+  </div>
+
+  <div class="timeline">
+
+```
+<!-- PHASE 1 -->
+<div class="tl-row">
+  <div class="tl-side">
+    <a class="phase-card p1" onclick="toggle('p1')" href="javascript:void(0)">
+      <div class="ph-label">Phase 1 · Weeks 1–2</div>
+      <div class="ph-title">🗄️ SQL Mastery + 🐍 Python for DE</div>
+      <div class="ph-topics">
+        <span>Window Functions</span><span>CTEs</span><span>Recursive Queries</span>
+        <span>SCD Logic</span><span>Pandas</span><span>File Handling</span>
+        <span>API Calls</span><span>OOP</span>
+      </div>
+      <div class="ph-parallel">⚡ Study SQL & Python simultaneously</div>
+      <div class="ph-click" style="color:#1565c0">📖 Click to expand full study guide →</div>
+    </a>
+  </div>
+  <div class="tl-center">
+    <div class="tl-week-badge">WK 1–2</div>
+  </div>
+  <div class="tl-side"></div>
+</div>
+
+<!-- PHASE 2 -->
+<div class="tl-row right">
+  <div class="tl-side">
+    <a class="phase-card p2" onclick="toggle('p2')" href="javascript:void(0)">
+      <div class="ph-label">Phase 2 · Weeks 3–4</div>
+      <div class="ph-title">⚙️ Spark Architecture + Databricks Platform</div>
+      <div class="ph-topics">
+        <span>DAG / Lineage</span><span>Driver & Executor</span><span>Lazy Eval</span>
+        <span>Notebooks</span><span>Clusters</span><span>Managed vs External Tables</span>
+        <span>Delta Log</span><span>Git Integration</span>
+      </div>
+      <div class="ph-parallel">⚡ Learn Spark concepts while setting up Databricks workspace</div>
+      <div class="ph-click" style="color:#00897b">📖 Click to expand full study guide →</div>
+    </a>
+  </div>
+  <div class="tl-center">
+    <div class="tl-week-badge">WK 3–4</div>
+  </div>
+  <div class="tl-side"></div>
+</div>
+
+<!-- PHASE 3 -->
+<div class="tl-row">
+  <div class="tl-side">
+    <a class="phase-card p3" onclick="toggle('p3')" href="javascript:void(0)">
+      <div class="ph-label">Phase 3 · Weeks 5–6</div>
+      <div class="ph-title">☁️ Azure Ecosystem: ADF + ADLS Gen2</div>
+      <div class="ph-topics">
+        <span>Linked Services</span><span>Pipelines & Triggers</span><span>Copy Activity</span>
+        <span>Parameterization</span><span>Integration Runtime</span>
+        <span>Hierarchical Namespace</span><span>ACLs</span><span>Mounting</span>
+      </div>
+      <div class="ph-parallel">⚡ Run ADF pipeline exercises + ADLS folder setup in parallel</div>
+      <div class="ph-click" style="color:#e65100">📖 Click to expand full study guide →</div>
+    </a>
+  </div>
+  <div class="tl-center">
+    <div class="tl-week-badge">WK 5–6</div>
+  </div>
+  <div class="tl-side"></div>
+</div>
+
+<!-- PHASE 4 -->
+<div class="tl-row right">
+  <div class="tl-side">
+    <a class="phase-card p4" onclick="toggle('p4')" href="javascript:void(0)">
+      <div class="ph-label">Phase 4 · Weeks 6–8</div>
+      <div class="ph-title">🔥 PySpark Deep Dive + Delta Lake</div>
+      <div class="ph-topics">
+        <span>DataFrame API</span><span>UDFs</span><span>Window Functions</span>
+        <span>Broadcast Joins</span><span>ACID Transactions</span><span>Z-Ordering</span>
+        <span>Time Travel</span><span>Merge Logic</span><span>SCD Type 1 & 2</span>
+      </div>
+      <div class="ph-parallel">⚡ Overlaps with Phase 3 — do PySpark + ADF notebooks together</div>
+      <div class="ph-click" style="color:#6a1b9a">📖 Click to expand full study guide →</div>
+    </a>
+  </div>
+  <div class="tl-center">
+    <div class="tl-week-badge">WK 6–8</div>
+  </div>
+  <div class="tl-side"></div>
+</div>
+
+<!-- PHASE 5 -->
+<div class="tl-row">
+  <div class="tl-side">
+    <a class="phase-card p5" onclick="toggle('p5')" href="javascript:void(0)">
+      <div class="ph-label">Phase 5 · Weeks 8–9</div>
+      <div class="ph-title">🏗️ Medallion Architecture + Data Modeling</div>
+      <div class="ph-topics">
+        <span>Bronze/Silver/Gold</span><span>Star Schema</span><span>Fact & Dims</span>
+        <span>Incremental Load</span><span>Row Hash</span><span>Audit Columns</span>
+        <span>Auto Loader</span><span>CDC</span>
+      </div>
+      <div class="ph-parallel">⚡ Build your capstone project architecture here</div>
+      <div class="ph-click" style="color:#2e7d32">📖 Click to expand full study guide →</div>
+    </a>
+  </div>
+  <div class="tl-center">
+    <div class="tl-week-badge">WK 8–9</div>
+  </div>
+  <div class="tl-side"></div>
+</div>
+
+<!-- PHASE 6 -->
+<div class="tl-row right">
+  <div class="tl-side">
+    <a class="phase-card p6" onclick="toggle('p6')" href="javascript:void(0)">
+      <div class="ph-label">Phase 6 · Week 10</div>
+      <div class="ph-title">🔧 CI/CD, DevOps, Security & Governance</div>
+      <div class="ph-topics">
+        <span>Azure DevOps Pipelines</span><span>Git Branching</span><span>Key Vault</span>
+        <span>Unity Catalog</span><span>RBAC</span><span>Service Principals</span>
+        <span>Purview</span><span>Data Quality</span>
+      </div>
+      <div class="ph-parallel">⚡ Wire CI/CD into your capstone project simultaneously</div>
+      <div class="ph-click" style="color:#c62828">📖 Click to expand full study guide →</div>
+    </a>
+  </div>
+  <div class="tl-center">
+    <div class="tl-week-badge">WK 10</div>
+  </div>
+  <div class="tl-side"></div>
+</div>
+
+<!-- PHASE 7 -->
+<div class="tl-row">
+  <div class="tl-side">
+    <a class="phase-card p7" onclick="toggle('p7')" href="javascript:void(0)">
+      <div class="ph-label">Phase 7 · Weeks 11–12</div>
+      <div class="ph-title">🎯 Interview Prep + Project Narration</div>
+      <div class="ph-topics">
+        <span>Mock Interviews</span><span>SQL Coding Drills</span><span>PySpark Patterns</span>
+        <span>System Design</span><span>Project STAR Stories</span><span>LinkedIn Refresh</span>
+        <span>Resume Tailoring</span><span>Offer Negotiation</span>
+      </div>
+      <div class="ph-parallel">⚡ Target Tier-2 companies from your interview question bank</div>
+      <div class="ph-click" style="color:#f57f17">📖 Click to expand full study guide →</div>
+    </a>
+  </div>
+  <div class="tl-center">
+    <div class="tl-week-badge">WK 11–12</div>
+  </div>
+  <div class="tl-side"></div>
+</div>
+```
+
+  </div><!-- /timeline -->
+
+  <!-- ══ PHASE DETAIL PANELS ══ -->
+
+  <!-- P1: SQL + PYTHON -->
+
+  <div class="detail-panel p1" id="panel-p1">
+    <div class="panel-header">
+      <h2>🗄️ Phase 1: SQL Mastery + Python for Data Engineering</h2>
+      <button class="close-btn" onclick="toggle('p1')">✕</button>
+    </div>
+    <div class="grid2">
+      <div class="info-box">
+        <h4>SQL — What to Study (From Your Notes)</h4>
+        <ul>
+          <li>INNER, LEFT, CROSS, SELF joins — know when to use each</li>
+          <li>Window functions: ROW_NUMBER(), RANK(), DENSE_RANK(), NTILE()</li>
+          <li>Analytical: LAG(), LEAD() for time-series comparisons</li>
+          <li>CTEs + Recursive CTEs (org hierarchy, sequences)</li>
+          <li>Pivot & Unpivot (row-to-column transformation)</li>
+          <li>LTE Logic — Latest Time Entry using RANK / ROW_NUMBER</li>
+          <li>SCD Type 1 & 2 logic in SQL</li>
+          <li>Deduplication: ROW_NUMBER() PARTITION BY + delete pattern</li>
+          <li>ACID properties, TRUNCATE vs DELETE, stored procs vs functions</li>
+          <li>Indexes: clustered vs non-clustered, when to use</li>
+          <li>Star schema vs Snowflake vs 3NF — interview favourite</li>
+        </ul>
+      </div>
+      <div class="info-box">
+        <h4>Python — What to Study</h4>
+        <ul>
+          <li>Data types, loops, conditions, comprehensions</li>
+          <li>OOP: Classes, inheritance, encapsulation</li>
+          <li>Collections: list, tuple, set, dict — differences matter</li>
+          <li>File handling: read/write CSV, JSON, Parquet</li>
+          <li>pandas: read_csv, merge, groupby, apply, fillna, drop_duplicates</li>
+          <li>requests module — call REST APIs, parse JSON response</li>
+          <li>Error handling: try/except/finally</li>
+          <li>Context managers (with statement)</li>
+          <li>Serialization: json.dumps / json.loads, pickle</li>
+          <li>String manipulation (palindrome, vowel replace, word count)</li>
+          <li>Database connectivity: pyodbc / sqlalchemy</li>
+        </ul>
+      </div>
+    </div>
+
+```
+<div class="code-box">
+```
+
+<span class="cmt">– SQL: Top 3 earners per dept (asked at Deloitte, Accenture, Tiger Analytics)</span>
+SELECT * FROM (
+SELECT emp_name, dept, salary,
+DENSE_RANK() OVER (PARTITION BY dept ORDER BY salary DESC) AS rnk
+FROM employees
+) x WHERE rnk <= 3;
+
+<span class="cmt">– LTE (Last Time Entry) Logic — critical pattern for DE interviews</span>
+SELECT * FROM (
+SELECT *, ROW_NUMBER() OVER (PARTITION BY emp_id ORDER BY updated_at DESC) AS rn
+FROM employee_history
+) x WHERE rn = 1;
+
+<span class="cmt">– Recursive CTE: org hierarchy</span>
+WITH RECURSIVE org AS (
+SELECT emp_id, name, manager_id, 0 AS lvl FROM employees WHERE manager_id IS NULL
+UNION ALL
+SELECT e.emp_id, e.name, e.manager_id, o.lvl + 1
+FROM employees e JOIN org o ON e.manager_id = o.emp_id
+)
+SELECT * FROM org;
+</div>
+
+```
+<div class="code-box">
+```
+
+<span class="cmt"># Python: pandas data engineering patterns</span>
+<span class="kw">import</span> pandas <span class="kw">as</span> pd, json, requests
+
+<span class="cmt"># Read and transform</span>
+df = pd.read_csv(<span class="str">‘data.csv’</span>)
+df[<span class="str">‘full_name’</span>] = df[<span class="str">‘first_name’</span>] + <span class="str">’ ’</span> + df[<span class="str">‘last_name’</span>]
+df.drop_duplicates(subset=[<span class="str">‘emp_id’</span>], inplace=True)
+df[<span class="str">‘salary’</span>].fillna(df[<span class="str">‘salary’</span>].median(), inplace=True)
+
+<span class="cmt"># API call pattern</span>
+resp = requests.get(<span class="str">‘https://api.example.com/data’</span>, headers={<span class="str">‘Authorization’</span>:<span class="str">‘Bearer TOKEN’</span>})
+data = resp.json()
+df_api = pd.DataFrame(data[<span class="str">‘records’</span>])
+df_api.to_parquet(<span class="str">‘output.parquet’</span>, index=False)
+</div>
+
+```
+<div class="grid2">
+  <div class="interview-q">
+    <h4>🎯 Top Interview Questions — SQL (Your Bank)</h4>
+    <div class="q-item"><strong>Q:</strong> How to find nth highest salary? → Use DENSE_RANK or OFFSET-FETCH</div>
+    <div class="q-item"><strong>Q:</strong> Difference between RANK and DENSE_RANK? → RANK skips numbers on ties</div>
+    <div class="q-item"><strong>Q:</strong> Write cumulative sum → SUM() OVER (ORDER BY date ROWS UNBOUNDED PRECEDING)</div>
+    <div class="q-item"><strong>Q:</strong> Find employees earning more than manager → Self-join on manager_id</div>
+    <div class="q-item"><strong>Q:</strong> TRUNCATE vs DELETE → TRUNCATE: DDL, no rollback, resets identity. DELETE: DML, can rollback, supports WHERE</div>
+    <div class="q-item"><strong>Q:</strong> Union vs Union All → Union removes dupes (slower). Union All keeps all rows (faster)</div>
+  </div>
+  <div class="say-box">
+    <h4>💬 What to Say in Interview After Week 2</h4>
+    <p>"In my analyst role I was extensively involved in data validation and reporting. I wrote complex SQL using window functions like DENSE_RANK and LAG to identify latest records and trends. I built CTEs for readability and used pivot logic for report transformations. I'm now applying these in pipeline contexts — validating data quality between Bronze and Silver layers using assertion queries."</p>
+  </div>
+</div>
+
+<div class="week-box" style="margin-top:16px;">
+  <h4>📅 Week 1–2 Daily Plan</h4>
+  <table class="week-tbl">
+    <tr><th>Day</th><th>SQL Focus</th><th>Python Focus</th></tr>
+    <tr><td>Mon/Tue</td><td>Joins + Aggregations + Window Functions</td><td>Core syntax + Data types + OOP basics</td></tr>
+    <tr><td>Wed/Thu</td><td>CTEs, Recursive, LTE Logic</td><td>pandas: read, merge, groupby, fillna</td></tr>
+    <tr><td>Fri</td><td>Pivot, Deduplication, SCD SQL patterns</td><td>File I/O: CSV, JSON, Parquet</td></tr>
+    <tr><td>Sat</td><td>Practice 10 SQL coding questions from your bank</td><td>API calls with requests + error handling</td></tr>
+    <tr><td>Sun</td><td>Revise ACID, schema types, indexes</td><td>2 Python coding problems (palindrome, word count)</td></tr>
+  </table>
+</div>
+```
+
+  </div>
+
+  <!-- P2: SPARK + DATABRICKS -->
+
+  <div class="detail-panel p2" id="panel-p2">
+    <div class="panel-header">
+      <h2>⚙️ Phase 2: Spark Architecture + Databricks Platform</h2>
+      <button class="close-btn" onclick="toggle('p2')">✕</button>
+    </div>
+    <div class="grid2">
+      <div class="info-box">
+        <h4>Apache Spark — What to Study</h4>
+        <ul>
+          <li>Driver vs Executor vs Cluster Manager — draw this architecture</li>
+          <li>Lazy Evaluation — transformations don't execute until action called</li>
+          <li>DAG (Directed Acyclic Graph) — how Spark builds execution plan</li>
+          <li>Narrow vs Wide Transformations — critical difference</li>
+          <li>Jobs → Stages → Tasks — how Spark breaks down work</li>
+          <li>Shuffle — what causes it, how to reduce it</li>
+          <li>Partitioning: default 200 partitions, repartition vs coalesce</li>
+          <li>Caching: cache() vs persist() vs MEMORY_AND_DISK</li>
+          <li>Broadcast join — when to use (&lt;10MB table)</li>
+          <li>AQE (Adaptive Query Execution) — Databricks-specific feature</li>
+          <li>Data Skew — what it is, how to handle (salting technique)</li>
+        </ul>
+      </div>
+      <div class="info-box">
+        <h4>Databricks Platform — What to Practice</h4>
+        <ul>
+          <li>Create workspace → cluster → notebook (Free Community Edition)</li>
+          <li>Job cluster vs Interactive cluster — difference & use case</li>
+          <li>Managed vs External tables — where data lives on ADLS</li>
+          <li>Temp views vs Global views vs Permanent tables</li>
+          <li>Widgets & parameters in notebooks</li>
+          <li>%run vs dbutils.notebook.run() — when to use each</li>
+          <li>Delta Log — what is the _delta_log folder?</li>
+          <li>Unity Catalog — 3-level namespace: catalog.schema.table</li>
+          <li>Git integration — connect notebook to Azure Repos</li>
+          <li>Databricks Workflows — job scheduling, dependencies</li>
+          <li>Connect ADLS using service principal + Key Vault</li>
+        </ul>
+      </div>
+    </div>
+
+```
+<div class="code-box">
+```
+
+<span class="cmt"># Spark Architecture in code — SparkSession</span>
+<span class="kw">from</span> pyspark.sql <span class="kw">import</span> SparkSession
+spark = SparkSession.builder.appName(<span class="str">“DE_Practice”</span>).getOrCreate()
+
+<span class="cmt"># Narrow vs Wide Transformation demo</span>
+df = spark.read.csv(<span class="str">”/mnt/raw/data.csv”</span>, header=True, inferSchema=True)
+df_filtered = df.<span class="fn">filter</span>(df.age > 25)   <span class="cmt"># NARROW — no shuffle</span>
+df_grouped  = df.<span class="fn">groupBy</span>(<span class="str">“dept”</span>).<span class="fn">count</span>()  <span class="cmt"># WIDE — causes shuffle</span>
+
+<span class="cmt"># repartition vs coalesce</span>
+df_repartitioned = df.<span class="fn">repartition</span>(10)     <span class="cmt"># full shuffle, can increase or decrease</span>
+df_coalesced     = df.<span class="fn">coalesce</span>(4)          <span class="cmt"># no shuffle, only decreases partitions</span>
+
+<span class="cmt"># Caching for repeated use</span>
+df.<span class="fn">cache</span>()
+df.<span class="fn">persist</span>(StorageLevel.MEMORY_AND_DISK)  <span class="cmt"># safer for large data</span>
+
+<span class="cmt"># Broadcast join — small table broadcast</span>
+<span class="kw">from</span> pyspark.sql.functions <span class="kw">import</span> broadcast
+df_large.<span class="fn">join</span>(broadcast(df_small), <span class="str">“emp_id”</span>)
+</div>
+
+```
+<div class="grid2">
+  <div class="interview-q">
+    <h4>🎯 Top Interview Questions — Spark (Tiger Analytics, Tredence, Deloitte)</h4>
+    <div class="q-item"><strong>Q:</strong> Explain lazy evaluation → Transformations build a plan; actions (collect, count, write) execute it. Benefit: optimization, lineage tracking</div>
+    <div class="q-item"><strong>Q:</strong> groupByKey vs reduceByKey → reduceByKey combines locally before shuffle (faster). groupByKey shuffles everything (memory-heavy)</div>
+    <div class="q-item"><strong>Q:</strong> repartition vs coalesce → repartition = full shuffle, can increase/decrease. coalesce = no shuffle, can only decrease</div>
+    <div class="q-item"><strong>Q:</strong> How many jobs/stages/tasks? → 1 Action = 1 Job. Each wide transformation creates a new Stage. Tasks = partitions per stage</div>
+    <div class="q-item"><strong>Q:</strong> What is AQE? → Adaptive Query Execution: dynamically adjusts plan at runtime (skew handling, join strategy)</div>
+  </div>
+  <div class="say-box">
+    <h4>💬 What to Say in Interview After Week 4</h4>
+    <p>"I've worked with Databricks to build and manage ETL notebooks. I understand the Spark execution model — how a DAG is formed, how wide transformations like groupBy trigger shuffles, and how I can use broadcast joins for smaller lookup tables to avoid costly shuffles. I configure cluster autoscaling and use caching strategically on reused DataFrames to reduce compute time."</p>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- P3: ADF + ADLS -->
+
+  <div class="detail-panel p3" id="panel-p3">
+    <div class="panel-header">
+      <h2>☁️ Phase 3: Azure Data Factory + ADLS Gen2</h2>
+      <button class="close-btn" onclick="toggle('p3')">✕</button>
+    </div>
+    <div class="grid3">
+      <div class="info-box">
+        <h4>ADF Core Concepts</h4>
+        <ul>
+          <li>Linked Services — connection definitions (SQL, ADLS, Blob, Salesforce)</li>
+          <li>Datasets — pointer to data structure</li>
+          <li>Pipelines — orchestration container</li>
+          <li>Activities: Copy, Notebook, Stored Proc, Lookup, ForEach, If Condition, Wait</li>
+          <li>Triggers: Schedule, Tumbling Window, Event-based, Manual</li>
+          <li>Parameterization — dynamic pipelines at scale</li>
+          <li>Metadata-driven pipelines — copy all tables using ForEach + Lookup</li>
+          <li>Integration Runtime: Azure IR, Self-Hosted IR (on-prem), SSIS IR</li>
+          <li>Error handling: retry policy, failure path, dependency conditions</li>
+          <li>Data Flows: visual ETL transformations (schema drift, derived column)</li>
+          <li>Key Vault integration — never store passwords in ADF</li>
+          <li>CI/CD: ARM template export → Azure DevOps pipeline</li>
+        </ul>
+      </div>
+      <div class="info-box">
+        <h4>ADLS Gen2 — What to Study</h4>
+        <ul>
+          <li>ADLS Gen2 vs Blob Storage — hierarchical namespace</li>
+          <li>Gen1 vs Gen2 — Gen2 has POSIX ACLs, Blob API compatibility</li>
+          <li>Storage tiers: Hot, Cool, Archive</li>
+          <li>Folder hierarchy: raw/ bronze/ silver/ gold/</li>
+          <li>ACLs vs RBAC — when to use which</li>
+          <li>Mounting ADLS in Databricks using service principal</li>
+          <li>Why mounting &gt; access keys (security, rotation)</li>
+          <li>Lifecycle management policies (auto-tier after X days)</li>
+          <li>Encryption at rest + in transit (TLS)</li>
+          <li>Disaster recovery: geo-redundant storage (GRS)</li>
+          <li>Private endpoints + VNet integration</li>
+        </ul>
+      </div>
+      <div class="info-box">
+        <h4>Project Ref: From Your Uploads</h4>
+        <ul>
+          <li><strong>PROJECT_2:</strong> On-prem VM → ADF → ADLS Gen2 → Synapse</li>
+          <li><strong>PROJECT_5:</strong> Trade validation with ADF Data Flows + parameterized pipelines</li>
+          <li><strong>PROJECT_7:</strong> SQL Server on-prem → Azure Blob using Self-Hosted IR</li>
+          <li><strong>PROJECT_8:</strong> MySQL on-prem → Azure SQL via ADF (step-by-step)</li>
+          <li><strong>KEY PATTERN:</strong> Metadata-driven pipelines to copy multiple tables</li>
+          <li><strong>KEY PATTERN:</strong> Binary copy for large 3TB+ file migration</li>
+          <li><strong>KEY PATTERN:</strong> Error routing to error folder with failure activity</li>
+        </ul>
+      </div>
+    </div>
+
+```
+<div class="code-box">
+```
+
+<span class="cmt"># Mount ADLS Gen2 in Databricks using Service Principal</span>
+configs = {
+<span class="str">“fs.azure.account.auth.type”</span>: <span class="str">“OAuth”</span>,
+<span class="str">“fs.azure.account.oauth.provider.type”</span>: <span class="str">“org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider”</span>,
+<span class="str">“fs.azure.account.oauth2.client.id”</span>: <span class="str">”<app-id>”</span>,
+<span class="str">“fs.azure.account.oauth2.client.secret”</span>: dbutils.secrets.get(<span class="str">“kv-scope”</span>, <span class="str">“sp-secret”</span>),
+<span class="str">“fs.azure.account.oauth2.client.endpoint”</span>: <span class="str">“https://login.microsoftonline.com/<tenant-id>/oauth2/token”</span>
+}
+dbutils.fs.mount(
+source=<span class="str">“abfss://bronze@mystorageacct.dfs.core.windows.net/”</span>,
+mount_point=<span class="str">”/mnt/bronze”</span>,
+extra_configs=configs
+)
+<span class="cmt"># Now access as: df = spark.read.parquet(”/mnt/bronze/sales/”)</span>
+</div>
+
+```
+<div class="grid2">
+  <div class="interview-q">
+    <h4>🎯 ADF + ADLS Interview Questions (PWC, EY, Cognizant, Wipro)</h4>
+    <div class="q-item"><strong>Q:</strong> Types of Integration Runtime? → Azure (cloud-to-cloud), Self-Hosted (on-prem), SSIS (SSIS package migration)</div>
+    <div class="q-item"><strong>Q:</strong> How to copy 3TB file from on-prem to Azure? → Self-Hosted IR + binary copy + parallel copy settings</div>
+    <div class="q-item"><strong>Q:</strong> Incremental load in ADF? → Watermark pattern: store max(updated_at), query WHERE updated_at > watermark</div>
+    <div class="q-item"><strong>Q:</strong> Where to store passwords in ADF? → Azure Key Vault, never in linked service plain text</div>
+    <div class="q-item"><strong>Q:</strong> Handle schema drift in ADF? → Enable schema drift in Data Flow, use dynamic content with @dataset() expressions</div>
+    <div class="q-item"><strong>Q:</strong> Mounting vs access keys? → Mounting is preferred — keys can be compromised; service principal + Key Vault enables rotation without changing code</div>
+  </div>
+  <div class="say-box">
+    <h4>💬 What to Say in Interview After Week 6</h4>
+    <p>"I've built ADF pipelines that handle both full and incremental loads. For incremental loads, I implemented a watermark table pattern — storing the last processed timestamp and using it as a filter in the source query. For parameterization, I use pipeline parameters with ForEach activities to loop over a metadata table, making the pipeline generic across any number of source tables. Sensitive credentials are always stored in Azure Key Vault and referenced via linked service."</p>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- P4: PYSPARK + DELTA LAKE -->
+
+  <div class="detail-panel p4" id="panel-p4">
+    <div class="panel-header">
+      <h2>🔥 Phase 4: PySpark Deep Dive + Delta Lake</h2>
+      <button class="close-btn" onclick="toggle('p4')">✕</button>
+    </div>
+    <div class="grid2">
+      <div class="info-box">
+        <h4>PySpark — What to Study</h4>
+        <ul>
+          <li>SparkSession vs SparkContext — use SparkSession in modern Spark</li>
+          <li>DataFrame API: select, filter, withColumn, alias, cast</li>
+          <li>Joins: inner, left, right, full outer, cross, semi, anti</li>
+          <li>groupBy + agg: sum, count, avg, max, min, collect_list</li>
+          <li>Window functions: RANK, DENSE_RANK, ROW_NUMBER, LAG, LEAD</li>
+          <li>UDFs: register with @udf decorator or udf() function</li>
+          <li>Handling nulls: isNull(), isNotNull(), fillna(), dropna()</li>
+          <li>Handling duplicates: dropDuplicates(subset=[...])</li>
+          <li>Reading: CSV, Parquet, JSON, Delta, JDBC</li>
+          <li>Writing: mode("overwrite"), mode("append"), partitionBy()</li>
+          <li>Streaming basics: readStream, writeStream (Auto Loader)</li>
+        </ul>
+      </div>
+      <div class="info-box">
+        <h4>Delta Lake — What to Study</h4>
+        <ul>
+          <li>Delta Lake vs Parquet — ACID transactions, time travel, schema enforcement</li>
+          <li>Delta Log (_delta_log) — JSON + checkpoint files tracking all operations</li>
+          <li>MERGE INTO — upsert logic (insert if new, update if changed)</li>
+          <li>Time Travel: VERSION AS OF / TIMESTAMP AS OF</li>
+          <li>Schema enforcement vs schema evolution (mergeSchema option)</li>
+          <li>Z-Ordering: collocate related data, improves file skipping</li>
+          <li>OPTIMIZE — compact small files into larger ones</li>
+          <li>VACUUM — delete old files (default 7-day retention)</li>
+          <li>SCD Type 1: overwrite with MERGE</li>
+          <li>SCD Type 2: add effective_date, end_date, is_current flag</li>
+          <li>Incremental load without updated_at → Row Hash comparison</li>
+        </ul>
+      </div>
+    </div>
+
+```
+<div class="code-box">
+```
+
+<span class="cmt"># MERGE INTO — the single most important PySpark interview pattern</span>
+<span class="kw">from</span> delta.tables <span class="kw">import</span> DeltaTable
+
+delta_tbl = DeltaTable.forPath(spark, <span class="str">”/mnt/silver/employees”</span>)
+
+delta_tbl.alias(<span class="str">“target”</span>).merge(
+source_df.alias(<span class="str">“source”</span>),
+<span class="str">“target.emp_id = source.emp_id”</span>
+).whenMatchedUpdate(set={
+<span class="str">“salary”</span>: <span class="str">“source.salary”</span>,
+<span class="str">“updated_at”</span>: <span class="str">“source.updated_at”</span>
+}).whenNotMatchedInsert(values={
+<span class="str">“emp_id”</span>: <span class="str">“source.emp_id”</span>,
+<span class="str">“salary”</span>: <span class="str">“source.salary”</span>,
+<span class="str">“created_at”</span>: <span class="str">“source.updated_at”</span>
+}).execute()
+
+<span class="cmt"># SCD Type 2 — track history</span>
+<span class="kw">from</span> pyspark.sql.functions <span class="kw">import</span> current_date, lit, sha2, concat_ws
+
+<span class="cmt"># Generate row hash to detect changes (when no updated_at column)</span>
+df_hash = df.withColumn(<span class="str">“row_hash”</span>,
+sha2(concat_ws(<span class="str">”||”</span>, df.name, df.salary, df.dept), 256))
+
+<span class="cmt"># Z-Ordering + OPTIMIZE</span>
+spark.sql(<span class="str">“OPTIMIZE silver.employees ZORDER BY (dept, emp_id)”</span>)
+spark.sql(<span class="str">“VACUUM silver.employees RETAIN 168 HOURS”</span>)
+
+<span class="cmt"># Time Travel</span>
+df_v1 = spark.read.format(<span class="str">“delta”</span>).option(<span class="str">“versionAsOf”</span>, 1).load(<span class="str">”/mnt/silver/emp”</span>)
+</div>
+
+```
+<div class="grid2">
+  <div class="interview-q">
+    <h4>🎯 PySpark + Delta Lake Questions (All Companies in Your Bank)</h4>
+    <div class="q-item"><strong>Q:</strong> Delta Lake vs Parquet? → Delta adds: ACID transactions, time travel, schema enforcement, MERGE support, optimized file layout</div>
+    <div class="q-item"><strong>Q:</strong> Incremental load without updated_at? → Row Hash: SHA2 all columns, compare hash in source vs target, merge on key + hash mismatch</div>
+    <div class="q-item"><strong>Q:</strong> What is Delta Log? → _delta_log folder with JSON transaction logs; every write creates a new log entry; checkpoint every 10 commits</div>
+    <div class="q-item"><strong>Q:</strong> Z-ordering benefit? → Co-locates related data in same files; Spark can skip entire files during reads using data skipping stats</div>
+    <div class="q-item"><strong>Q:</strong> VACUUM purpose? → Removes files no longer referenced by Delta table; default 7-day retention to support time travel</div>
+    <div class="q-item"><strong>Q:</strong> How to handle null values? → df.fillna(0, subset=['salary']), df.dropna(how='all'), df.where(col('id').isNotNull())</div>
+  </div>
+  <div class="say-box">
+    <h4>💬 What to Say in Interview After Week 8</h4>
+    <p>"For incremental loads I use MERGE INTO on Delta tables. When source data doesn't have an updated_at column — which happens in legacy systems — I compute a SHA2 row hash across all meaningful columns and merge based on primary key plus hash mismatch. For SCD Type 2, I add effective_start_date, effective_end_date and is_current columns, closing the previous record on update. I also run OPTIMIZE with Z-ORDERING on high-cardinality filter columns to improve read performance."</p>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- P5: MEDALLION + DATA MODELING -->
+
+  <div class="detail-panel p5" id="panel-p5">
+    <div class="panel-header">
+      <h2>🏗️ Phase 5: Medallion Architecture + Data Modeling</h2>
+      <button class="close-btn" onclick="toggle('p5')">✕</button>
+    </div>
+    <div class="grid2">
+      <div class="info-box">
+        <h4>Medallion Architecture — Layer by Layer</h4>
+        <ul>
+          <li><strong>Landing Zone:</strong> Files dropped by source, no processing</li>
+          <li><strong>Bronze (Raw):</strong> Ingest as-is, add audit columns (ingestion_ts, source_file, batch_id). No transformations. Use Auto Loader for streaming</li>
+          <li><strong>Silver (Cleaned):</strong> Remove nulls, dedup, standardize formats, type casting, apply business rules, join lookups. Store as Delta</li>
+          <li><strong>Gold (Curated):</strong> Aggregated, business-ready views or tables. Fact + Dimension model. Optimized for BI/reporting</li>
+          <li><strong>Audit columns:</strong> created_at, updated_at, batch_id, source_file, is_active, row_hash</li>
+          <li><strong>Auto Loader:</strong> cloudFiles format — auto-detects new files in ADLS, processes incrementally</li>
+          <li><strong>CDC (Change Data Capture):</strong> Track inserts/updates/deletes from source</li>
+        </ul>
+      </div>
+      <div class="info-box">
+        <h4>Data Modeling — What to Study</h4>
+        <ul>
+          <li>Star Schema: Fact table + Dimension tables (denormalized)</li>
+          <li>Snowflake Schema: normalized dimensions (sub-dimensions)</li>
+          <li>3NF: Fully normalized, OLTP use case</li>
+          <li>Fact table: contains measures + FK to dims (sales_amount, qty)</li>
+          <li>Dimension table: descriptive attributes (customer, product, date)</li>
+          <li>Surrogate keys: system-generated IDs independent of source</li>
+          <li>SCD Type 1: overwrite — no history</li>
+          <li>SCD Type 2: add row with new version — full history</li>
+          <li>Data Lakehouse = Data Lake + ACID + query capability (Delta)</li>
+          <li>Data Mesh: domain-owned data products (Accenture loves this)</li>
+          <li>Data Vault: hub, satellite, link tables (highly scalable)</li>
+        </ul>
+      </div>
+    </div>
+
+```
+<div class="code-box">
+```
+
+<span class="cmt"># Auto Loader — Bronze layer ingestion (PROJECT_1 pattern)</span>
+df_stream = (spark.readStream
+.format(<span class="str">“cloudFiles”</span>)
+.option(<span class="str">“cloudFiles.format”</span>, <span class="str">“csv”</span>)
+.option(<span class="str">“cloudFiles.schemaLocation”</span>, <span class="str">”/mnt/schema/traffic”</span>)
+.option(<span class="str">“header”</span>, <span class="str">“true”</span>)
+.load(<span class="str">”/mnt/landing/traffic/”</span>)
+)
+
+<span class="cmt"># Add audit columns before writing to Bronze</span>
+<span class="kw">from</span> pyspark.sql.functions <span class="kw">import</span> current_timestamp, input_file_name, lit
+
+df_bronze = (df_stream
+.withColumn(<span class="str">“ingestion_ts”</span>, current_timestamp())
+.withColumn(<span class="str">“source_file”</span>, input_file_name())
+.withColumn(<span class="str">“batch_id”</span>, lit(<span class="str">“batch_001”</span>))
+)
+
+(df_bronze.writeStream
+.format(<span class="str">“delta”</span>)
+.outputMode(<span class="str">“append”</span>)
+.option(<span class="str">“checkpointLocation”</span>, <span class="str">”/mnt/checkpoint/bronze_traffic”</span>)
+.start(<span class="str">”/mnt/bronze/traffic”</span>)
+)
+</div>
+
+```
+<div class="grid2">
+  <div class="interview-q">
+    <h4>🎯 Architecture Questions (EY, Deloitte, Infosys, Cognizant)</h4>
+    <div class="q-item"><strong>Q:</strong> Explain Medallion Architecture → Bronze: raw + audit columns. Silver: cleaned + business rules. Gold: aggregated for BI. Each layer is Delta</div>
+    <div class="q-item"><strong>Q:</strong> Fact vs Dimension tables? → Fact: numeric measures + FK (sales, qty). Dimension: descriptive context (customer name, date)</div>
+    <div class="q-item"><strong>Q:</strong> Star vs Snowflake schema? → Star: faster queries, denormalized dims. Snowflake: less storage, normalized dims, more joins needed</div>
+    <div class="q-item"><strong>Q:</strong> What is a Data Lakehouse? → Combines data lake (cheap storage, any format) with data warehouse (ACID, schema, SQL) — enabled by Delta Lake</div>
+    <div class="q-item"><strong>Q:</strong> How to implement SCD Type 2? → New record with effective_start_date, NULL effective_end_date, is_current=True; update old record's end_date and is_current=False</div>
+  </div>
+  <div class="say-box">
+    <h4>💬 What to Say in Interview After Week 9</h4>
+    <p>"I've implemented the Medallion Architecture across all projects. In Bronze, data lands as-is with audit columns — ingestion timestamp, source file name, batch ID — for full traceability. Silver applies business rules: deduplication using row hash, null handling, and type standardization. Gold produces aggregated Delta tables in Star Schema format consumed by Power BI. Auto Loader handles incremental file detection automatically with exactly-once semantics."</p>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- P6: CICD + DEVOPS + SECURITY -->
+
+  <div class="detail-panel p6" id="panel-p6">
+    <div class="panel-header">
+      <h2>🔧 Phase 6: CI/CD, DevOps, Security & Governance</h2>
+      <button class="close-btn" onclick="toggle('p6')">✕</button>
+    </div>
+    <div class="grid2">
+      <div class="info-box">
+        <h4>Azure DevOps + CI/CD</h4>
+        <ul>
+          <li>Git branching: feature → develop → main (trunk-based or Gitflow)</li>
+          <li>ADF CI/CD: export ARM template from dev, deploy to QA/prod via DevOps pipeline</li>
+          <li>Databricks CI/CD: use Databricks CLI to deploy notebooks</li>
+          <li>Azure DevOps Pipelines: YAML-based build + release pipelines</li>
+          <li>Approvals & gates: manual approval before prod deployment</li>
+          <li>Environment-specific parameters: parameterize linked services per env</li>
+          <li>Rollback strategy: re-deploy previous ARM template version</li>
+          <li>Unit testing notebooks: pytest + databricks-connect or local mocks</li>
+        </ul>
+      </div>
+      <div class="info-box">
+        <h4>Security + Governance</h4>
+        <ul>
+          <li>Azure Key Vault: store connection strings, secrets, certificates</li>
+          <li>Service Principals: app registration for service-to-service auth</li>
+          <li>Managed Identity: Azure-managed SP without manual credential rotation</li>
+          <li>RBAC: role-based access (Storage Blob Data Reader/Contributor)</li>
+          <li>POSIX ACLs in ADLS Gen2: fine-grained folder-level permissions</li>
+          <li>Unity Catalog (Databricks): catalog.schema.table access governance</li>
+          <li>Azure Purview: data lineage, metadata catalogue, sensitivity labels</li>
+          <li>Data masking: dynamic masking in SQL / ADF data flows</li>
+          <li>Network security: VNet, private endpoints, firewall rules</li>
+          <li>Encryption: at rest (Azure Storage Service Encryption), TLS in transit</li>
+          <li>Audit logs: Diagnostic Settings → Log Analytics workspace</li>
+        </ul>
+      </div>
+    </div>
+
+```
+<div class="code-box">
+```
+
+<span class="cmt"># Databricks notebook CI/CD deployment via CLI</span>
+<span class="cmt"># azure-pipelines.yml snippet</span>
+<span class="cmt">
+
+# steps:
+
+# - script: |
+
+# pip install databricks-cli
+
+# databricks configure –token <<EOF
+
+# https://$(DATABRICKS_HOST)
+
+# $(DATABRICKS_TOKEN)
+
+# EOF
+
+# databricks workspace import_dir ./notebooks /Shared/Production –overwrite
+
+# displayName: ‘Deploy Notebooks to Databricks’
+
+</span>
+
+<span class="cmt"># Read secret from Key Vault in Databricks</span>
+storage_account_key = dbutils.secrets.get(scope=<span class="str">“kv-scope”</span>, key=<span class="str">“adls-key”</span>)
+spark.conf.set(
+<span class="str">“fs.azure.account.key.mystorageaccount.dfs.core.windows.net”</span>,
+storage_account_key
+)
+
+<span class="cmt"># Unity Catalog — 3-level namespace</span>
+spark.sql(<span class="str">“USE CATALOG prod_catalog”</span>)
+spark.sql(<span class="str">“USE SCHEMA silver”</span>)
+spark.sql(<span class="str">“GRANT SELECT ON TABLE employees TO `analyst@company.com`”</span>)
+</div>
+
+```
+<div class="grid2">
+  <div class="interview-q">
+    <h4>🎯 CI/CD + Security Questions (Accenture, Capgemini, IBM, JPMorgan)</h4>
+    <div class="q-item"><strong>Q:</strong> How do you implement CI/CD for ADF? → Dev ADF → Git branch → Pull request → DevOps pipeline picks up ARM template → deploys to QA → approval gate → prod</div>
+    <div class="q-item"><strong>Q:</strong> Managed Identity vs Service Principal? → Managed Identity is Azure-managed (no secret to rotate); SP requires manual secret management</div>
+    <div class="q-item"><strong>Q:</strong> What is Unity Catalog? → Databricks' governance layer: 3-level namespace, row/column-level security, lineage tracking, cross-workspace data sharing</div>
+    <div class="q-item"><strong>Q:</strong> How to secure secrets in Databricks? → dbutils.secrets.get() backed by Azure Key Vault; never hardcode credentials in notebooks</div>
+    <div class="q-item"><strong>Q:</strong> How to handle fault tolerance in ADF? → Retry policy per activity, skip incompatible rows (fault tolerance settings), failure path to error folder, email alerts via Logic Apps</div>
+  </div>
+  <div class="say-box">
+    <h4>💬 What to Say After Week 10</h4>
+    <p>"We follow a three-environment strategy: dev, QA, and production. ADF changes are committed to feature branches, reviewed via pull request, and deployed automatically using ARM templates through Azure DevOps release pipelines. Approvals gate promotion to production. All secrets — storage keys, API tokens, database passwords — are stored in Azure Key Vault and referenced using dbutils.secrets in Databricks and managed identities in ADF linked services."</p>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- P7: INTERVIEW PREP -->
+
+  <div class="detail-panel p7" id="panel-p7">
+    <div class="panel-header">
+      <h2>🎯 Phase 7: Interview Preparation + Project Narration</h2>
+      <button class="close-btn" onclick="toggle('p7')">✕</button>
+    </div>
+    <div class="grid2">
+      <div class="info-box">
+        <h4>Weeks 11–12 Daily Activities</h4>
+        <ul>
+          <li>Every morning: 3 SQL coding questions from your bank</li>
+          <li>Every evening: 2 PySpark pattern questions</li>
+          <li>Weekday mock: system design question + narrate your project</li>
+          <li>Weekend: full mock interview (1.5 hrs) with a friend or recorded</li>
+          <li>Target companies: Tiger Analytics, Tredence, Deloitte, Infosys, Accenture, Cognizant, Wipro, Capgemini from your question bank</li>
+          <li>Apply to 5+ roles per day once mock scores improve</li>
+          <li>LinkedIn: post 1 technical tip per week to signal expertise</li>
+          <li>GitHub: push all project code with README to public repo</li>
+        </ul>
+      </div>
+      <div class="info-box">
+        <h4>System Design — How to Answer</h4>
+        <ul>
+          <li>Structure: Source → Ingestion → Storage → Processing → Serving → Monitoring</li>
+          <li>Always mention: error handling, retry logic, audit columns, idempotency</li>
+          <li>Always mention: security (Key Vault, RBAC, service principal)</li>
+          <li>Always mention: CI/CD for deployment automation</li>
+          <li>Real-time vs batch decision: latency requirements drive this</li>
+          <li>Use Medallion Architecture as your default answer framework</li>
+          <li>Know when to choose Synapse vs Databricks vs ADF-only</li>
+          <li>Cost optimization: autoscaling, spot instances, storage tiers</li>
+        </ul>
+      </div>
+    </div>
+
+```
+<div class="say-box" style="margin-bottom:16px;">
+  <h4>💬 Master Project Narration Script (3 minutes)</h4>
+  <p>"I worked on an end-to-end Azure Data Engineering pipeline handling [domain, e.g., financial transactions / traffic analytics]. Data was ingested daily from [source, e.g., on-prem SQL Server / Blob Storage] into Azure Data Lake Gen2 using Azure Data Factory with parameterized, metadata-driven pipelines — a single pipeline handles all tables dynamically. From the landing zone, Auto Loader in Databricks streamed new files into the Bronze layer, appending records with audit columns including ingestion timestamp and source file path. Bronze to Silver transformation involved deduplication using row-level SHA2 hashing, null handling, format standardization, and applying SCD Type 2 merge logic using Delta Lake's MERGE INTO command. The Gold layer materialized aggregated Delta tables in a Star Schema for Power BI consumption. The entire deployment was automated through Azure DevOps — feature branches merging to develop, ARM template deployment to QA, approval gate, then production. All secrets were managed via Azure Key Vault."</p>
+</div>
+
+<div class="interview-q">
+  <h4>🎯 Most Commonly Asked Questions Across All Companies in Your Bank</h4>
+  <div class="q-item"><strong>PYSPARK:</strong> Lazy evaluation, groupByKey vs reduceByKey, repartition vs coalesce, broadcast join, UDF registration, AQE, incremental load without updated_at, caching, null handling</div>
+  <div class="q-item"><strong>SQL:</strong> nth highest salary, top 3 per dept, LAG/LEAD, cumulative sum, employees earning more than manager, gaps in sequence, deduplication, pivot</div>
+  <div class="q-item"><strong>DATABRICKS:</strong> Job vs interactive cluster, Unity Catalog, Delta logs, SCD Type 1 & 2 in PySpark, autoscaling, caching vs persisting, %run vs dbutils.notebook.run</div>
+  <div class="q-item"><strong>ADF:</strong> Incremental load (watermark), full vs incremental, IR types, copy 3TB file, error handling, binary copy, parallel copies, metadata-driven pipeline, Key Vault integration</div>
+  <div class="q-item"><strong>ADLS:</strong> Blob vs ADLS difference, mounting vs access keys, security (ACLs, RBAC), versioning, lifecycle policies, Gen1 vs Gen2, disaster recovery</div>
+  <div class="q-item"><strong>ARCHITECTURE:</strong> End-to-end pipeline design, Medallion layers, Data Lakehouse definition, when to use Synapse vs Databricks, CI/CD for ADF and Databricks</div>
+</div>
+```
+
+  </div>
+
+</div><!-- /roadmap-wrap -->
+</div><!-- /roadmap-section -->
+
+<hr class="divider">
+
+<!-- ═══════════════════ TIMETABLE ═══════════════════ -->
+
+<div class="section" id="timetable">
+  <div class="section-title">📅 Realistic Daily & Weekly Timetable</div>
+  <div class="section-sub">Designed for a working professional — 2 hrs/weekday, 5–6 hrs/weekend day</div>
+
+  <div class="timetable-grid">
+    <div class="tt-card">
+      <h3>🌅 Weekday Schedule (Mon–Fri)</h3>
+      <div class="tt-slot">
+        <div class="tt-time">6:00–7:00 AM</div>
+        <div class="tt-act"><strong>Theory + Concept</strong><span>Read notes, watch 1 concept video (no coding yet — let brain warm up)</span></div>
+      </div>
+      <div class="tt-slot">
+        <div class="tt-time">7:30–8:00 AM</div>
+        <div class="tt-act"><strong>Quick Drill</strong><span>1 SQL question or 1 Python problem from your bank (timed, 15 min)</span></div>
+      </div>
+      <div class="tt-slot">
+        <div class="tt-time">Work Day</div>
+        <div class="tt-act"><strong>Day Job</strong><span>But mentally map your current work to DE concepts wherever possible</span></div>
+      </div>
+      <div class="tt-slot">
+        <div class="tt-time">8:30–10:00 PM</div>
+        <div class="tt-act"><strong>Hands-On Practice</strong><span>Code in Databricks / ADF / write PySpark — follow weekly phase plan</span></div>
+      </div>
+      <div class="tt-slot">
+        <div class="tt-time">10:00–10:30 PM</div>
+        <div class="tt-act"><strong>Interview Revision</strong><span>Review 3–5 Q&A flashcards from the relevant phase</span></div>
+      </div>
+    </div>
+
+```
+<div class="tt-card">
+  <h3>📆 Weekend Schedule (Sat–Sun)</h3>
+  <div class="tt-slot">
+    <div class="tt-time">9:00–11:00 AM</div>
+    <div class="tt-act"><strong>Project Build Session</strong><span>Work on the weekly project — build a full notebook or pipeline component</span></div>
+  </div>
+  <div class="tt-slot">
+    <div class="tt-time">11:00–12:00</div>
+    <div class="tt-act"><strong>SQL Coding Sprint</strong><span>5 SQL questions from your interview bank — timed, no hints</span></div>
+  </div>
+  <div class="tt-slot">
+    <div class="tt-time">1:30–3:30 PM</div>
+    <div class="tt-act"><strong>Deep-Dive Practice</strong><span>PySpark transformations / ADF pipeline / Databricks deployment</span></div>
+  </div>
+  <div class="tt-slot">
+    <div class="tt-time">3:30–4:30 PM</div>
+    <div class="tt-act"><strong>Mock Interview</strong><span>Wk 1–8: self-quiz. Wk 9–12: record yourself answering 10 questions aloud</span></div>
+  </div>
+  <div class="tt-slot">
+    <div class="tt-time">4:30–5:30 PM</div>
+    <div class="tt-act"><strong>Review & Notes</strong><span>Consolidate week's learning, update cheat sheet, GitHub commit</span></div>
+  </div>
+</div>
+
+<div class="tt-card">
+  <h3>📊 12-Week Phase Timeline</h3>
+  <table class="week-tbl">
+    <tr><th>Week</th><th>Primary Focus</th><th>Secondary</th></tr>
+    <tr><td>1</td><td>Advanced SQL</td><td>Python Core</td></tr>
+    <tr><td>2</td><td>SQL Coding Practice</td><td>pandas + File I/O</td></tr>
+    <tr><td>3</td><td>Spark Architecture</td><td>Databricks Setup + Notebooks</td></tr>
+    <tr><td>4</td><td>Databricks Platform</td><td>Delta Lake Basics</td></tr>
+    <tr><td>5</td><td>ADF Pipelines</td><td>ADLS Gen2 Setup</td></tr>
+    <tr><td>6</td><td>ADF Advanced + ADLS</td><td>PySpark Basics</td></tr>
+    <tr><td>7</td><td>PySpark Deep Dive</td><td>Delta Lake MERGE/SCD</td></tr>
+    <tr><td>8</td><td>Medallion Architecture</td><td>Auto Loader + CDC</td></tr>
+    <tr><td>9</td><td>Capstone Project Build</td><td>Data Modeling</td></tr>
+    <tr><td>10</td><td>CI/CD + DevOps</td><td>Security + Governance</td></tr>
+    <tr><td>11</td><td>Interview Drills</td><td>Project Narration</td></tr>
+    <tr><td>12</td><td>Mock Interviews</td><td>Apply + LinkedIn</td></tr>
+  </table>
+</div>
+
+<div class="tt-card">
+  <h3>⚡ Time Investment Summary</h3>
+  <div class="tt-slot">
+    <div class="tt-time">Weekday</div>
+    <div class="tt-act"><strong>~2.5 hours/day</strong><span>1h theory morning + 1.5h hands-on evening</span></div>
+  </div>
+  <div class="tt-slot">
+    <div class="tt-time">Weekend</div>
+    <div class="tt-act"><strong>~5 hours/day</strong><span>Project builds + mock interviews + deep dives</span></div>
+  </div>
+  <div class="tt-slot">
+    <div class="tt-time">Weekly</div>
+    <div class="tt-act"><strong>~22.5 hours/week</strong><span>Equivalent to a part-time bootcamp</span></div>
+  </div>
+  <div class="tt-slot">
+    <div class="tt-time">12 Weeks</div>
+    <div class="tt-act"><strong>~270 hours total</strong><span>Enough for entry-to-mid Azure DE role readiness</span></div>
+  </div>
+  <div class="tt-slot" style="background:#f0fdf4;border-radius:8px;padding:8px;">
+    <div class="tt-time" style="color:#166534;font-weight:800;">Golden Rule</div>
+    <div class="tt-act"><strong style="color:#166534;">Code > Watch > Read</strong><span>80% of your time must be hands-on. No passive video marathons.</span></div>
+  </div>
+</div>
+```
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════ PROJECTS ═══════════════════ -->
+
+<div class="section" id="projects">
+  <div class="section-title">💼 Recommended Project Execution Plan</div>
+  <div class="section-sub">Based on your 14 uploaded project PDFs — ranked by interview impact. Build these in order.</div>
+
+  <div class="proj-grid">
+
+```
+<div class="proj-card" style="border-color:#e65100;">
+  <h3>🥇 PROJECT A (Week 5–8) · On-Prem to Azure Migration</h3>
+  <div class="proj-meta"><span>ADF</span><span>ADLS Gen2</span><span>Databricks</span><span>Synapse</span></div>
+  <p>Based on PROJECT_2 & PROJECT_8 from your uploads. Most commonly asked in interviews — covers Self-Hosted IR, Bronze-Silver-Gold pipeline, ADF orchestration.</p>
+  <ul class="proj-steps">
+    <li>Set up Self-Hosted IR, connect on-prem SQL Server (or local MySQL)</li>
+    <li>ADF pipeline: copy all tables using ForEach + Lookup metadata pattern</li>
+    <li>Land raw files in ADLS Gen2 bronze/ folder with date partition</li>
+    <li>Databricks Bronze notebook: add audit columns, write Delta</li>
+    <li>Silver notebook: dedup, null handle, type cast, MERGE INTO Delta</li>
+    <li>Gold notebook: Star schema views / aggregated tables</li>
+    <li>ADF orchestrates notebooks via Notebook Activity in sequence</li>
+  </ul>
+</div>
+
+<div class="proj-card" style="border-color:#6a1b9a;">
+  <h3>🥈 PROJECT B (Week 8–9) · Financial Data Lakehouse</h3>
+  <div class="proj-meta"><span>Delta Lake</span><span>SCD Type 2</span><span>PySpark</span><span>Medallion</span></div>
+  <p>Based on PROJECT_9 from your uploads. Demonstrates advanced Delta Lake, SCD Type 2, row hash incremental load — exactly what Tier-2 companies ask about.</p>
+  <ul class="proj-steps">
+    <li>Ingest customer, stock, transaction CSVs to Bronze via ADF</li>
+    <li>Silver: remove dupes on Customer_ID, clean Name/Email/Phone, normalize dates</li>
+    <li>Implement SCD Type 2 for customer dimension (track address changes)</li>
+    <li>Row Hash for stock data (no updated_at) — SHA2 merge logic</li>
+    <li>Gold: aggregated transaction metrics, portfolio summary</li>
+    <li>Add data quality validation: null checks, referential integrity</li>
+  </ul>
+</div>
+
+<div class="proj-card" style="border-color:#1565c0;">
+  <h3>🥉 PROJECT C (Week 9–10) · Traffic Analytics Real-Time Pipeline</h3>
+  <div class="proj-meta"><span>Auto Loader</span><span>Streaming</span><span>Unity Catalog</span><span>CI/CD</span></div>
+  <p>Based on PROJECT_1 from your uploads. Showcases Auto Loader, streaming patterns, Unity Catalog governance — differentiates you from SQL-only candidates.</p>
+  <ul class="proj-steps">
+    <li>Simulate streaming: drop files into ADLS landing/ folder periodically</li>
+    <li>Auto Loader Bronze: cloudFiles format, schema evolution enabled</li>
+    <li>Silver: filter invalid records, enrich with road metadata join</li>
+    <li>Gold: real-time aggregations as Delta views for Power BI</li>
+    <li>Unity Catalog: set up catalog, schema, grant analyst access</li>
+    <li>CI/CD: push notebooks to Azure DevOps, auto-deploy to workspace</li>
+  </ul>
+</div>
+
+<div class="proj-card" style="border-color:#2e7d32;">
+  <h3>PROJECT D (Week 10) · Trade Validation Pipeline</h3>
+  <div class="proj-meta"><span>ADF Data Flows</span><span>Parameterized</span><span>Error Routing</span></div>
+  <p>Based on PROJECT_5. Demonstrates ADF Data Flows with complex join/filter logic, error record routing — strong for financial domain interviews.</p>
+  <ul class="proj-steps">
+    <li>Ingest buy/sell trade files to Bronze from Blob Storage daily</li>
+    <li>ADF Data Flow: filter invalid records, join on trade ID + quantity</li>
+    <li>Route matched trades to Silver, unmatched to error/ path</li>
+    <li>Parameterize pipeline to handle any file format dynamically</li>
+    <li>Gold: valid trades only, select required columns via parameters</li>
+  </ul>
+</div>
+
+<div class="proj-card" style="border-color:#f57f17;">
+  <h3>PROJECT E (Week 11) · COVID-19 Analytics (Portfolio Piece)</h3>
+  <div class="proj-meta"><span>ADF Ingestion</span><span>Databricks</span><span>Synapse</span><span>Power BI</span></div>
+  <p>Based on PROJECT_10. Full E2E with public dataset — easy to explain, covers every layer from ingestion to visualization. Great for GitHub portfolio.</p>
+  <ul class="proj-steps">
+    <li>Ingest public COVID-19 data via ADF HTTP connector</li>
+    <li>ADLS Gen2: raw → bronze → silver → gold structure</li>
+    <li>Databricks transformations with PySpark</li>
+    <li>Synapse Analytics: create views on Gold layer for querying</li>
+    <li>Power BI dashboard on top of Synapse / Gold Delta tables</li>
+  </ul>
+</div>
+
+<div class="proj-card" style="border-color:#00897b;">
+  <h3>PROJECT F (Week 11) · Policy Lifecycle Tracking + Snowflake</h3>
+  <div class="proj-meta"><span>Databricks</span><span>Snowflake</span><span>SCD Logic</span><span>Data Quality</span></div>
+  <p>Based on PROJECT_6. Covers Snowflake integration — unique differentiator since many companies use Snowflake. Also demonstrates duration tracking logic.</p>
+  <ul class="proj-steps">
+    <li>Ingest daily policy status files from Blob Storage to Bronze</li>
+    <li>Silver: track policy status transitions, compute duration in each status</li>
+    <li>Data quality: validate status codes, check referential integrity</li>
+    <li>Connect Databricks to Snowflake using Snowflake Spark connector</li>
+    <li>Load Gold-level data to Snowflake for downstream analytics</li>
+  </ul>
+</div>
+```
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════ MASTER INTERVIEW Q&A ═══════════════════ -->
+
+<div class="section" id="interview-master">
+  <div class="section-title">🎯 Master Interview Q&A Bank</div>
+  <div class="section-sub">Compiled from your uploaded question banks — Tiger Analytics, Tredence, Deloitte, Infosys, Accenture, Capgemini, IBM, JPMorgan, PWC, EY, Cognizant, Wipro and more</div>
+
+  <details class="qa-accordion">
+    <summary>⚡ PySpark — Core Concepts (Most Asked)</summary>
+    <div class="qa-content">
+      <ul>
+        <li><strong>Lazy Evaluation:</strong> Transformations (filter, select, join) just build a logical plan. No execution until an action (collect, count, write, show) is called. Benefit: Spark can optimize the whole plan before running.</li>
+        <li><strong>groupByKey vs reduceByKey:</strong> reduceByKey combines values locally on each partition before shuffling (map-side reduce). groupByKey sends all values to the reducer first — more data over network, higher memory usage. Always prefer reduceByKey for aggregations.</li>
+        <li><strong>repartition vs coalesce:</strong> repartition = full shuffle, can increase OR decrease partitions. coalesce = no shuffle, can ONLY decrease. Use coalesce before writing to reduce output files.</li>
+        <li><strong>Broadcast join:</strong> Copies small table (&lt;10MB by default) to every executor. Eliminates shuffle on the large table side. Use broadcast() hint or set spark.sql.autoBroadcastJoinThreshold.</li>
+        <li><strong>UDF registration:</strong> @udf(returnType=StringType()) decorator or udf(lambda x: x.upper(), StringType()). UDFs break Catalyst optimization — use built-in functions first, UDFs as last resort.</li>
+        <li><strong>Jobs/Stages/Tasks:</strong> 1 Action = 1 Job. Each wide transformation (groupBy, join, sort) creates a new Stage boundary. Tasks = number of partitions in that stage.</li>
+        <li><strong>AQE (Adaptive Query Execution):</strong> Dynamically adjusts query plan at runtime — coalesces small partitions, changes join strategy, handles data skew automatically. Enabled by default in Databricks.</li>
+        <li><strong>Incremental load without updated_at:</strong> Compute SHA2 hash of all business columns. On merge: insert if key not in target. Update if key exists but hash changed. No hash change = no update needed.</li>
+        <li><strong>Data Skew handling:</strong> Salting — add random salt key to skewed partition key, repartition, process, then aggregate. AQE handles it automatically in Databricks.</li>
+        <li><strong>Streaming vs Batch:</strong> Batch = bounded data set processed at intervals. Streaming = unbounded, continuous processing with micro-batches (Spark Structured Streaming). Use streaming for &lt;5-minute latency requirements.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="qa-accordion">
+    <summary>🗄️ SQL — Coding & Concepts (All Rounds)</summary>
+    <div class="qa-content">
+      <ul>
+        <li><strong>nth highest salary:</strong> SELECT DISTINCT salary FROM emp ORDER BY salary DESC LIMIT 1 OFFSET (n-1) — OR use DENSE_RANK() = n</li>
+        <li><strong>Top 3 per department:</strong> DENSE_RANK() OVER (PARTITION BY dept ORDER BY salary DESC) and filter rank &lt;= 3</li>
+        <li><strong>Cumulative sum:</strong> SUM(salary) OVER (PARTITION BY dept ORDER BY hire_date ROWS UNBOUNDED PRECEDING)</li>
+        <li><strong>Employees earning more than manager:</strong> Self join — e1 JOIN e1 as mgr ON e1.manager_id = mgr.emp_id WHERE e1.salary > mgr.salary</li>
+        <li><strong>Find gaps in sequence:</strong> Use LAG() to find where current_id - prev_id > 1</li>
+        <li><strong>TRUNCATE vs DELETE:</strong> TRUNCATE = DDL, no WHERE, no rollback, resets identity, faster. DELETE = DML, supports WHERE, can rollback, triggers fire.</li>
+        <li><strong>Stored proc vs function:</strong> Function must return a value, cannot modify DB state, can be used in SELECT. Stored proc can return multiple result sets, can modify data, cannot be used in SELECT.</li>
+        <li><strong>Union vs Union All:</strong> Union removes duplicates (sorts data = slower). Union All keeps all rows including dupes (faster). Use Union All unless you specifically need deduplication.</li>
+        <li><strong>Star vs Snowflake schema:</strong> Star = denormalized dims, faster queries, more storage. Snowflake = normalized dims, less storage, more joins needed. Choose Star for BI/reporting, Snowflake for strict normalization requirements.</li>
+        <li><strong>Pivot row to column:</strong> CASE WHEN + GROUP BY pattern or SQL Server PIVOT syntax</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="qa-accordion">
+    <summary>🔷 Azure Data Factory — Pipeline Patterns</summary>
+    <div class="qa-content">
+      <ul>
+        <li><strong>Incremental load pattern:</strong> 1) Lookup last watermark from control table. 2) Query source WHERE updated_at > watermark. 3) Copy to target. 4) Update watermark table with new max(updated_at).</li>
+        <li><strong>Metadata-driven pipeline:</strong> Store source/target mappings in a config table. ForEach activity reads config table via Lookup. Inside ForEach: Copy activity with dynamic source/sink parameters.</li>
+        <li><strong>Integration Runtime types:</strong> Azure IR (cloud-to-cloud, no config needed). Self-Hosted IR (for on-prem or private network access — install on a VM). Azure-SSIS IR (for running SSIS packages in cloud).</li>
+        <li><strong>Copy 3TB from on-prem:</strong> Self-Hosted IR + binary copy (no parsing = maximum throughput). Set parallelCopies higher. Use staging in Azure Blob. Schedule during off-peak. Can split into chunks using file-based partitioning.</li>
+        <li><strong>Error handling:</strong> On Failure dependency path → send to error folder. Retry policy: set retryCount and retryIntervalInSeconds per activity. Log error to Log Analytics. Email via Logic App trigger on failure.</li>
+        <li><strong>Schema drift in ADF Data Flows:</strong> Enable "Allow schema drift" on source. Use schemaModification:allowInsertAndUpdate in sink. Dynamic column mappings using patterns.</li>
+        <li><strong>Key Vault integration:</strong> Create Azure Key Vault. Store secrets. In ADF, create AKV Linked Service. Reference secret using @{linkedService().secretName} in linked service definition.</li>
+        <li><strong>Trigger types:</strong> Schedule (cron), Tumbling Window (fixed-size windows with dependency support), Event-based (fires on blob creation/deletion), Manual (on-demand).</li>
+        <li><strong>Pass parameters to Databricks:</strong> In Notebook Activity → Base Parameters field → pass JSON key-value pairs. In notebook, receive with dbutils.widgets.get("param_name").</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="qa-accordion">
+    <summary>🏭 Databricks — Platform & Architecture</summary>
+    <div class="qa-content">
+      <ul>
+        <li><strong>Job cluster vs Interactive cluster:</strong> Interactive = long-running, for development/notebooks, shared by multiple users. Job cluster = spun up for a specific job, terminates after, cheaper, isolated, for production workloads.</li>
+        <li><strong>Unity Catalog:</strong> 3-level namespace: catalog.schema.table. Centralized governance across all Databricks workspaces. Row/column-level security. Data lineage. Shares data across workspaces without copying.</li>
+        <li><strong>%run vs dbutils.notebook.run():</strong> %run = inline execution in same session (shares variables, same cluster). dbutils.notebook.run() = separate session, returns a string result, supports timeout and parameters.</li>
+        <li><strong>Delta Log:</strong> _delta_log/ folder contains JSON files for each transaction and checkpoint files every 10 commits. Enables time travel, ACID, schema evolution, audit history.</li>
+        <li><strong>Caching vs Persisting:</strong> cache() = shorthand for persist(StorageLevel.MEMORY_ONLY). persist() lets you specify storage level: MEMORY_ONLY, MEMORY_AND_DISK, DISK_ONLY. Use MEMORY_AND_DISK for large datasets that don't fit in memory.</li>
+        <li><strong>Autoscaling clusters:</strong> Cluster scales between min and max workers based on pending tasks. Good for variable workloads. Be careful — scaling up takes ~2 min; don't use for time-critical streaming jobs.</li>
+        <li><strong>Delta Live Tables (DLT):</strong> Declarative pipeline framework. Define tables with @dlt.table decorator. Handles dependencies, error handling, monitoring automatically. Good for continuous pipelines.</li>
+        <li><strong>Optimization techniques:</strong> File compaction with OPTIMIZE. Data co-location with Z-ORDER. Remove stale files with VACUUM. Caching hot datasets. Broadcast small lookup tables. Partition by date columns for time-based queries.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="qa-accordion">
+    <summary>💾 Delta Lake — Advanced Patterns</summary>
+    <div class="qa-content">
+      <ul>
+        <li><strong>Delta Lake vs Parquet:</strong> Parquet = columnar file format, no ACID. Delta = file format + transaction log + ACID + time travel + schema enforcement + MERGE support + streaming + batch unification.</li>
+        <li><strong>MERGE INTO:</strong> ACID upsert — insert new records, update changed records, optionally delete removed records. Single atomic operation. Based on matched/not-matched conditions.</li>
+        <li><strong>Time Travel:</strong> SELECT * FROM table VERSION AS OF 5 — reads table state at version 5. SELECT * FROM table TIMESTAMP AS OF '2024-01-01' — reads state at that timestamp. Used for auditing and debugging.</li>
+        <li><strong>Schema evolution:</strong> By default, Delta enforces schema on write (rejects extra columns). Enable schema evolution: .option("mergeSchema", "true") on write, or ALTER TABLE ADD COLUMN.</li>
+        <li><strong>Z-Ordering:</strong> Co-locates related data within same data files. Run: OPTIMIZE table ZORDER BY (column). Benefits: file skipping during reads on those columns. Best for high-cardinality columns frequently used in WHERE clauses.</li>
+        <li><strong>OPTIMIZE:</strong> Compacts many small files into larger ones (default target: 1GB). Improves read performance. Run periodically, not after every write.</li>
+        <li><strong>VACUUM:</strong> Physically deletes files no longer referenced by Delta table. Default retention: 7 days (168 hours). Running VACUUM removes ability to time-travel to versions older than retention period.</li>
+        <li><strong>SCD Type 2 in Delta:</strong> On each batch, find changed records (key exists + hash different). Update target: set end_date = today, is_current = False. Insert new version: start_date = today, end_date = NULL, is_current = True.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="qa-accordion">
+    <summary>🔧 General Azure + Cloud Architecture</summary>
+    <div class="qa-content">
+      <ul>
+        <li><strong>ADF vs Logic Apps vs Azure Functions:</strong> ADF = orchestrate large-scale data pipelines. Logic Apps = workflow automation, system integrations (connectors-based). Azure Functions = lightweight event-driven serverless code (HTTP trigger, timer, event hub).</li>
+        <li><strong>Synapse vs Databricks:</strong> Synapse = integrated analytics + SQL Data Warehouse + limited Spark. Databricks = best-in-class Spark, ML/AI, Delta Lake native. Use Databricks for complex ETL/ML; Synapse for SQL-heavy analytics workloads.</li>
+        <li><strong>ETL vs ELT:</strong> ETL = transform before loading (traditional, limited by tool). ELT = load raw first, transform in cloud using native compute (modern, scalable). Azure pattern is ELT: load to ADLS, transform with Databricks.</li>
+        <li><strong>Dedicated SQL Pool vs Serverless:</strong> Dedicated = provisioned compute/storage, pay always, for high-throughput consistent workloads. Serverless = on-demand, pay per TB scanned, good for ad-hoc queries on ADLS.</li>
+        <li><strong>Data Lineage:</strong> Track data from source to destination — which tables fed which, what transformations applied. Azure Purview provides automated lineage from ADF pipelines and Databricks.</li>
+        <li><strong>Real-time pipeline:</strong> Source → Azure Event Hubs → Stream Analytics / Databricks Structured Streaming → Delta Lake / Power BI streaming dataset. (PROJECT_3 pattern)</li>
+        <li><strong>PolyBase:</strong> Synapse Analytics feature to query external data in ADLS/Blob directly without loading. Creates external tables that point to files. Used in PROJECT_16.</li>
+        <li><strong>High availability for Azure SQL:</strong> Geo-replication (readable secondary in another region). Auto-failover groups. Zone-redundant deployment. Point-in-time restore (up to 35 days).</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="qa-accordion">
+    <summary>🐍 Python — Coding Questions from Your Bank</summary>
+    <div class="qa-content">
+      <ul>
+        <li><strong>Palindrome check:</strong> s == s[::-1] — or use two-pointer approach</li>
+        <li><strong>Word count in string:</strong> from collections import Counter; Counter(s.split())</li>
+        <li><strong>Prime numbers up to N:</strong> Sieve of Eratosthenes — create boolean array, mark multiples as non-prime</li>
+        <li><strong>Fibonacci sequence:</strong> Generator pattern: a, b = 0, 1; while True: yield a; a, b = b, a+b</li>
+        <li><strong>Split name into first/last:</strong> df['first'] = df['full_name'].str.split(' ').str[0]; df['last'] = df['full_name'].str.split(' ').str[-1]</li>
+        <li><strong>Find duplicates in list:</strong> [x for x, count in Counter(lst).items() if count > 1]</li>
+        <li><strong>Consecutive appearances:</strong> Group consecutive equal elements using itertools.groupby, filter groups with len >= n</li>
+        <li><strong>List vs Tuple vs Set:</strong> List = ordered, mutable, allows dupes. Tuple = ordered, immutable, allows dupes (use for fixed data). Set = unordered, mutable, no dupes (use for membership testing)</li>
+        <li><strong>Replace vowels:</strong> re.sub('[aeiouAEIOU]', ' ', string) — or loop with str.maketrans</li>
+        <li><strong>Parse JSON to DataFrame:</strong> import json; data = json.load(f); pd.DataFrame(data) — handle nested JSON with pd.json_normalize()</li>
+        <li><strong>Merge two dicts:</strong> {**dict1, **dict2} — or dict1 | dict2 (Python 3.9+)</li>
+        <li><strong>Connect to DB with Python:</strong> import pyodbc; conn = pyodbc.connect('DRIVER={SQL Server};SERVER=...;DATABASE=...;UID=...;PWD=...'); pd.read_sql(query, conn)</li>
+      </ul>
+    </div>
+  </details>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════ POSITIONING TIPS ═══════════════════ -->
+
+<div class="section" id="positioning">
+  <div class="section-title">🎭 How to Position Your Experience to Recruiters</div>
+  <div class="section-sub">Structuring your narrative: 2 years as Data Analyst → 3 years as Data Engineer. Authentic framing — never fabricate, but frame your real work in DE language.</div>
+
+  <div class="pos-card">
+    <h3>📋 Your Cover Story Framework</h3>
+    <p style="font-size:.9rem;margin-bottom:12px;">Your 5-year journey has two natural phases. The key is to use the real work you did but describe it through a Data Engineering lens. Power BI work involved data pipelines feeding it — that is data engineering context.</p>
+    <div class="narrative-box">
+      <p><strong>Years 1–2 (Data Analyst framing):</strong> "In my first two years I worked as a Data Analyst, primarily focused on business intelligence using Power BI. I built complex DAX measures, designed star-schema data models, and worked closely with data engineers to understand the pipelines feeding my reports. This gave me a deep understanding of <strong>what good data looks like and where bad data comes from</strong> — which became the foundation for my shift into engineering."</p>
+      <br>
+      <p><strong>Years 3–5 (Data Engineer framing):</strong> "I transitioned into a more data engineering-oriented role, taking ownership of the pipelines I previously relied on. I worked with Azure Data Factory for ingestion, built Databricks notebooks for transformation following Medallion architecture, managed Azure Data Lake storage layers, and implemented Delta Lake for reliable ACID-compliant data storage. I also handled incremental load patterns, data quality validations, and CI/CD deployment via Azure DevOps."</p>
+    </div>
+  </div>
+
+  <div class="pos-card" style="border-color:#1565c0;">
+    <h3>💬 Phrases to Use on Your Resume + LinkedIn</h3>
+    <div class="grid2">
+      <div class="info-box" style="border-color:#1565c0;">
+        <h4>Resume Bullet Templates</h4>
+        <ul>
+          <li>"Designed and implemented ADF pipelines for incremental data loads from on-premises SQL Server to Azure Data Lake Gen2, processing ~X million records daily"</li>
+          <li>"Built Bronze-Silver-Gold Medallion architecture on Databricks using PySpark and Delta Lake with SCD Type 2 merge logic"</li>
+          <li>"Implemented metadata-driven, parameterized ADF pipelines to dynamically handle 15+ source tables without pipeline duplication"</li>
+          <li>"Developed row-hash based incremental detection for source tables without change-tracking columns, reducing data transfer by 70%"</li>
+          <li>"Configured ADLS Gen2 with POSIX ACLs and service principal authentication; managed secrets via Azure Key Vault"</li>
+          <li>"Automated CI/CD deployment of Databricks notebooks and ADF ARM templates using Azure DevOps pipelines with approval gates"</li>
+        </ul>
+      </div>
+      <div class="info-box" style="border-color:#e65100;">
+        <h4>What to Say When Asked About Experience</h4>
+        <ul>
+          <li><strong>If asked "Have you worked with ADF?":</strong> "Yes — I've built parameterized pipelines for incremental loads using the watermark pattern, and metadata-driven pipelines using ForEach with a control table to handle multiple sources dynamically."</li>
+          <li><strong>If asked "How long have you been doing DE?":</strong> "I've been actively working on data pipelines for about 3 years — initially in a hybrid analyst-engineer role, and increasingly pure engineering. I've been building on Azure specifically for the past 2 years."</li>
+          <li><strong>If asked about a gap:</strong> "My analyst background actually made me a better engineer — I understand the consumer side of data and design pipelines that deliver clean, audit-ready data that analysts can trust."</li>
+          <li><strong>Power BI tie-in:</strong> "My Power BI experience means I design Gold-layer data models specifically for BI consumption — I know exactly what columns, data types, and aggregation levels make a report fast and maintainable."</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="pos-card" style="border-color:#2e7d32;">
+    <h3>🎯 LinkedIn Profile Optimization</h3>
+    <div class="grid2">
+      <div class="info-box" style="border-color:#2e7d32;">
+        <h4>Headline Options</h4>
+        <ul>
+          <li>"Azure Data Engineer | ADF • Databricks • Delta Lake • PySpark"</li>
+          <li>"Data Engineer | Azure Stack | Medallion Architecture | 5 YOE"</li>
+          <li>"Data Engineer (Azure) | ETL • ADF • Databricks • ADLS Gen2"</li>
+        </ul>
+        <h4 style="margin-top:12px;">About Section Keywords</h4>
+        <ul>
+          <li>Azure Data Factory, Databricks, ADLS Gen2, Delta Lake, PySpark</li>
+          <li>Medallion Architecture, Incremental Load, SCD Type 2, MERGE</li>
+          <li>CI/CD, Azure DevOps, Unity Catalog, Key Vault, Service Principal</li>
+          <li>Star Schema, Data Modeling, Data Quality, Data Governance</li>
+        </ul>
+      </div>
+      <div class="info-box" style="border-color:#2e7d32;">
+        <h4>Skills to List (in Order of Impact)</h4>
+        <ul>
+          <li>Azure Data Factory · Azure Databricks · PySpark</li>
+          <li>Delta Lake · Azure Data Lake Storage Gen2</li>
+          <li>SQL · Python · Apache Spark</li>
+          <li>Medallion Architecture · ETL/ELT · Data Pipelines</li>
+          <li>Azure DevOps · CI/CD · Git</li>
+          <li>Azure Synapse Analytics · Azure Key Vault</li>
+          <li>Power BI · Data Modeling · Star Schema</li>
+          <li>Data Quality · Great Expectations · Azure Purview</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="pos-card" style="border-color:#f57f17;">
+    <h3>⚠️ Dos and Don'ts for Recruiters</h3>
+    <div class="grid2">
+      <div class="info-box" style="border-color:#2e7d32;background:#f0fdf4;">
+        <h4 style="color:#166534;">✅ DO These</h4>
+        <ul>
+          <li>Say "I've worked on" rather than "I know about"</li>
+          <li>Reference specific project patterns from your GitHub</li>
+          <li>Quantify: X million records, Y pipelines, Z% latency reduction</li>
+          <li>Mention mistakes and how you solved them — shows real experience</li>
+          <li>Connect analyst background to engineering: "As an analyst I saw what data problems look like downstream — that drives how I design pipelines"</li>
+          <li>Be specific about tools: "I used the watermark table pattern in ADF with a Lookup activity feeding a Copy activity"</li>
+          <li>Talk about production challenges: cluster OOM errors, handling late-arriving data, schema drift</li>
+        </ul>
+      </div>
+      <div class="info-box" style="border-color:#c62828;background:#fff5f5;">
+        <h4 style="color:#991b1b;">❌ DON'T Do These</h4>
+        <ul>
+          <li>Don't claim production experience with tools you only learned last week</li>
+          <li>Don't say "I'm familiar with" — say "I've implemented"</li>
+          <li>Don't pad years on resume — "3 years DE" when you mean 3 months will unravel in a technical screen</li>
+          <li>Don't give vague project descriptions — interviewers will probe with follow-ups</li>
+          <li>Don't memorise answers — understand concepts, explain in your own words</li>
+          <li>Don't skip the project builds — you need to have actually run the code to answer "what errors did you face?"</li>
+          <li>Don't apply before Week 9 — let your skills solidify first</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════ CERTIFICATIONS ═══════════════════ -->
+
+<div class="section" id="certs">
+  <div class="section-title">🏆 Certifications — Priority Order</div>
+  <div class="section-sub">Certifications signal commitment to recruiters. Target DP-900 first (quick win), then DP-203 during Week 8–10.</div>
+  <div class="cert-grid">
+    <div class="cert-card">
+      <div class="cert-icon">🌐</div>
+      <h4>DP-900: Azure Data Fundamentals</h4>
+      <p>Covers data concepts, Azure storage, analytics services. Easy pass — 2–3 days prep.</p>
+      <span class="cert-timing" style="background:#e8f5e9;color:#1b5e20;">Week 4 — Quick Win</span>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🔷</div>
+      <h4>DP-203: Azure Data Engineer Associate</h4>
+      <p>The main certification. Covers ADF, ADLS, Synapse, Databricks, Stream Analytics. Study while doing Phase 3–6.</p>
+      <span class="cert-timing" style="background:#fff3e0;color:#bf360c;">Week 8–10 — High Value</span>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">✴️</div>
+      <h4>Databricks Certified Associate DE</h4>
+      <p>Databricks-specific cert — tests PySpark, Delta Lake, Medallion, workflows. Very respected in DE interviews.</p>
+      <span class="cert-timing" style="background:#f3e5f5;color:#4a148c;">Week 10–12 — Differentiator</span>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">☁️</div>
+      <h4>AZ-900: Azure Fundamentals</h4>
+      <p>Baseline Azure knowledge. If you haven't taken it — do it alongside DP-900 in same week.</p>
+      <span class="cert-timing" style="background:#e3f2fd;color:#0d47a1;">Week 3–4 — Foundation</span>
+    </div>
+  </div>
+
+  <div style="background:#fff;border-radius:12px;padding:24px;margin-top:24px;box-shadow:0 2px 12px rgba(0,0,0,.08);">
+    <div class="section-title" style="font-size:1.1rem;margin-bottom:12px;">📌 Free Resources (Use These)</div>
+    <div class="grid3">
+      <div class="info-box"><h4>Hands-On Practice</h4><ul>
+        <li>Databricks Community Edition (free Databricks workspace)</li>
+        <li>Azure Free Account ($200 credit + free tier services)</li>
+        <li>LeetCode / StrataScratch for SQL practice</li>
+        <li>HackerRank for Python coding drills</li>
+      </ul></div>
+      <div class="info-box"><h4>Learning</h4><ul>
+        <li>Microsoft Learn (free, structured, exam-aligned)</li>
+        <li>Databricks Academy (free learning paths)</li>
+        <li>YouTube: Ankit Bansal (SQL), Seattle Data Guy (Azure DE)</li>
+        <li>Udemy: Azure Data Engineering courses (wait for sale — Rs 499)</li>
+      </ul></div>
+      <div class="info-box"><h4>Interview Prep</h4><ul>
+        <li>Your uploaded question bank (already excellent)</li>
+        <li>DataEngineer.io interview prep</li>
+        <li>GitHub: search "azure data engineering projects" for reference</li>
+        <li>LinkedIn: follow Azure Data Factory, Databricks official pages</li>
+      </ul></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+
+<div style="background:var(--navy);color:#aaa;text-align:center;padding:20px;font-size:.85rem;margin-top:40px;">
+  🚀 Azure Data Engineer 12-Week Roadmap | Built from your notes, interview questions & project files | Good luck! 💪
+</div>
+
+<script>
+function toggle(id){
+  const panel = document.getElementById('panel-'+id);
+  const isOpen = panel.classList.contains('open');
+  // close all
+  document.querySelectorAll('.detail-panel').forEach(p=>p.classList.remove('open'));
+  if(!isOpen){
+    panel.classList.add('open');
+    setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}),100);
+  }
+}
+// Active nav highlight
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(s=>{
+    if(window.scrollY>=s.offsetTop-120) cur=s.id;
+  });
+  document.querySelectorAll('nav a').forEach(a=>{
+    a.classList.toggle('active', a.getAttribute('href')==='#'+cur);
+  });
+});
+</script>
+
+</body>
+</html>
